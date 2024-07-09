@@ -23,7 +23,7 @@ class OwnQuestThemeData implements OwnThemeData {
 typedef OwnThemeChangeCallback = Function(OwnThemeData);
 
 class OwnTheme extends InheritedWidget {
-  OwnTheme({
+  const OwnTheme({
     required super.child,
     required this.data,
     this.changeCallback,

@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:own_quest_app/app/commons/own_theme/core/theme/own_theme.dart';
 import 'package:own_quest_app/app/commons/router/app_routes.dart';
 import 'package:own_quest_app/app/commons/router/router_config.dart';
+import 'package:own_quest_app/app/commons/router/routes.dart';
+import 'package:own_quest_app/app/commons/xdebugging/external/error_banner_factory.dart';
 import 'package:own_quest_app/app/di/injection.dart';
 import 'package:own_quest_app/app/utils/app_strings.dart';
 
@@ -30,12 +32,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AppRouterConfig router = GetIt.I();
-  
+
   @override
   Widget build(BuildContext context) {
+    final debugBanner = ErrorBannerFactory.buildBanner(() {
+      router.pushNamed(Routes.debugging.name);
+    });
     return OwnTheme(
       data: widget.theme,
       child: MaterialApp.router(
+        builder: debugBanner.createBuilderBanner,
         theme: ThemeData(
           pageTransitionsTheme: const PageTransitionsTheme(
             builders: {

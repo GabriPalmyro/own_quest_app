@@ -1,5 +1,6 @@
 enum Routes {
   splash('/'),
+  debugging('/debugging'),
   onboarding('/onboarding'),
   login('/login'),
   register('/register'),

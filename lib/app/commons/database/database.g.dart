@@ -215,10 +215,121 @@ class HabitTableCompanion extends UpdateCompanion<HabitTableData> {
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
+  _$AppDatabaseManager get managers => _$AppDatabaseManager(this);
   late final $HabitTableTable habitTable = $HabitTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [habitTable];
+}
+
+typedef $$HabitTableTableInsertCompanionBuilder = HabitTableCompanion Function({
+  Value<int> id,
+  required String title,
+  Value<DateTime> createdAt,
+});
+typedef $$HabitTableTableUpdateCompanionBuilder = HabitTableCompanion Function({
+  Value<int> id,
+  Value<String> title,
+  Value<DateTime> createdAt,
+});
+
+class $$HabitTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $HabitTableTable,
+    HabitTableData,
+    $$HabitTableTableFilterComposer,
+    $$HabitTableTableOrderingComposer,
+    $$HabitTableTableProcessedTableManager,
+    $$HabitTableTableInsertCompanionBuilder,
+    $$HabitTableTableUpdateCompanionBuilder> {
+  $$HabitTableTableTableManager(_$AppDatabase db, $HabitTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$HabitTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$HabitTableTableOrderingComposer(ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $$HabitTableTableProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+          }) =>
+              HabitTableCompanion(
+            id: id,
+            title: title,
+            createdAt: createdAt,
+          ),
+          getInsertCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            required String title,
+            Value<DateTime> createdAt = const Value.absent(),
+          }) =>
+              HabitTableCompanion.insert(
+            id: id,
+            title: title,
+            createdAt: createdAt,
+          ),
+        ));
+}
+
+class $$HabitTableTableProcessedTableManager extends ProcessedTableManager<
+    _$AppDatabase,
+    $HabitTableTable,
+    HabitTableData,
+    $$HabitTableTableFilterComposer,
+    $$HabitTableTableOrderingComposer,
+    $$HabitTableTableProcessedTableManager,
+    $$HabitTableTableInsertCompanionBuilder,
+    $$HabitTableTableUpdateCompanionBuilder> {
+  $$HabitTableTableProcessedTableManager(super.$state);
+}
+
+class $$HabitTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $HabitTableTable> {
+  $$HabitTableTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get title => $state.composableBuilder(
+      column: $state.table.title,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$HabitTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $HabitTableTable> {
+  $$HabitTableTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get title => $state.composableBuilder(
+      column: $state.table.title,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class _$AppDatabaseManager {
+  final _$AppDatabase _db;
+  _$AppDatabaseManager(this._db);
+  $$HabitTableTableTableManager get habitTable =>
+      $$HabitTableTableTableManager(_db, _db.habitTable);
 }
