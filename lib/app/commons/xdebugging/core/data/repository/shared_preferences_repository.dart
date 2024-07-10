@@ -11,13 +11,11 @@ class SharedPreferencesRepository implements LocalRepository {
 
   @override
   Future<void> save(DebuggingModel model) async {
-    return dataSource.saveData(model);
+    await dataSource.saveData(model);
   }
 
   @override
-  Future<List<DebuggingModel>> findAll() async {
-    return dataSource.findAll();
-  }
+  Future<List<DebuggingModel>> findAll() async => dataSource.findAll();
 
   @override
   Future<void> deleteAll() async {

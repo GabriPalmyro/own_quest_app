@@ -25,20 +25,40 @@ class ApiResponse extends Equatable implements DebuggingModel {
 
   factory ApiResponse.fromJson(Map<String, dynamic> json) {
     return ApiResponse(
-      requestTime: DateTime.parse(json['requestTime']),
-      responseTime: DateTime.parse(json['responseTime']),
+      requestTime: json['requestTime'] != null
+          ? DateTime.parse(
+              json['requestTime'],
+            )
+          : null,
+      responseTime: json['responseTime'] != null
+          ? DateTime.parse(
+              json['responseTime'],
+            )
+          : null,
       baseUrl: json['baseUrl'],
       path: json['path'],
       method: json['method'],
-      statusCode: json['statusCode'] as int,
+      statusCode: json['statusCode'] != null ? json['statusCode'] as int : null,
       request: json['request'],
-      body: json['body'] as dynamic,
+      body: json['body'],
       contentType: json['contentType'],
-      sendTimeout: Duration(milliseconds: json['sendTimeout']),
+      sendTimeout: json['sendTimeout'] != null
+          ? Duration(
+              milliseconds: json['sendTimeout'],
+            )
+          : null,
       responseType: json['responseType'],
-      receiveTimeout: Duration(milliseconds: json['receiveTimeout']),
+      receiveTimeout: json['receiveTimeout'] != null
+          ? Duration(
+              milliseconds: json['receiveTimeout'],
+            )
+          : null,
       queryParameters: json['queryParameters'],
-      connectionTimeout: Duration(milliseconds: json['connectionTimeout']),
+      connectionTimeout: json['connectionTimeout'] != null
+          ? Duration(
+              milliseconds: json['connectionTimeout'],
+            )
+          : null,
       curl: json['curl'],
       headers: json['headers'],
     );
@@ -117,6 +137,27 @@ class ApiResponse extends Equatable implements DebuggingModel {
       curl: curl ?? this.curl,
       headers: headers ?? this.headers,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'requestTime': requestTime?.toIso8601String(),
+      'responseTime': responseTime?.toIso8601String(),
+      'baseUrl': baseUrl,
+      'path': path,
+      'method': method,
+      'statusCode': statusCode,
+      'request': request,
+      'body': body,
+      'contentType': contentType,
+      'sendTimeout': sendTimeout?.inMilliseconds,
+      'responseType': responseType,
+      'receiveTimeout': receiveTimeout?.inMilliseconds,
+      'queryParameters': queryParameters,
+      'connectionTimeout': connectionTimeout?.inMilliseconds,
+      'curl': curl,
+      'headers': headers,
+    };
   }
 
   String get prettyJson {

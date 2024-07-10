@@ -20,6 +20,7 @@ class _NetworkRequestsPageState extends State<NetworkRequestsPage> {
   @override
   void initState() {
     super.initState();
+    _asyncInit();
   }
 
   Future<void> _asyncInit() async {

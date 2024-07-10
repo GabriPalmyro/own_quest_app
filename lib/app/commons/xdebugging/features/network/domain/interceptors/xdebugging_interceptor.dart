@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:own_quest_app/app/commons/xdebugging/core/data/repository/shared_preferences_repository.dart';
@@ -68,7 +69,9 @@ class XDebuggingInterceptor extends Interceptor {
           path: response.requestOptions.path,
         ),
       );
-    } catch (_) {}
+    } catch (_) {
+      log('Error saving response', name: 'XDebuggingInterceptor');
+    }
   }
 
   Future<void> _saveError(DioException response) async {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:own_quest_app/app/commons/xdebugging/core/data/factory/debugging_model_factory.dart';
 import 'package:own_quest_app/app/commons/xdebugging/core/data/models/debugging_model.dart';
@@ -24,11 +25,17 @@ class SharedPreferencesDataSource {
         storedData.removeLast();
       }
 
-      newData..addAll(storedData)..add(model);
+      newData
+        ..addAll(storedData)
+        ..add(model);
+
+      final encodedString = jsonEncode(newData);
 
       final preferences = await SharedPreferences.getInstance();
-      await preferences.setString(preferenceKey, jsonEncode(newData));
-    } catch (_) {}
+      await preferences.setString(preferenceKey, encodedString);
+    } catch (_) {
+      log('Error saving data on SharedPreferences', error: _);
+    }
   }
 
   Future<List<DebuggingModel>> findAll() async {
@@ -37,7 +44,7 @@ class SharedPreferencesDataSource {
       final allData = List<DebuggingModel>.empty(growable: true);
       final storedData = preferences.getString(preferenceKey);
 
-      if(storedData == null) {
+      if (storedData == null) {
         return [];
       }
 
@@ -48,6 +55,7 @@ class SharedPreferencesDataSource {
       allData.sort((a, b) => b.compareTo(a));
       return allData;
     } catch (_) {
+      log('Error getting data from SharedPreferences', error: _);
       return List<DebuggingModel>.empty(growable: true);
     }
   }

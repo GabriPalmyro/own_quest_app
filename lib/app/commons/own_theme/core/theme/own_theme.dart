@@ -18,6 +18,7 @@ class OwnQuestThemeData implements OwnThemeData {
 
   @override
   String get name => 'base';
+  
 }
 
 typedef OwnThemeChangeCallback = Function(OwnThemeData);
