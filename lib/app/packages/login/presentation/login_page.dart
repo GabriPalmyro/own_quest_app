@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -8,7 +7,6 @@ import 'package:own_quest_app/app/commons/own_theme/components/button/button.var
 import 'package:own_quest_app/app/commons/own_theme/components/components.dart';
 import 'package:own_quest_app/app/commons/own_theme/core/theme/own_theme.dart';
 import 'package:own_quest_app/app/commons/own_theme/core/tokens/support/illustrations/illustrations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -73,9 +71,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: tokens.spacing.stack.xl + tokens.spacing.stack.sm),
               OwnText(
-                text: 'Login',
+                text: 'Bem vind@ de volta! 🚀',
                 style: TextStyle(
-                  fontSize: tokens.font.size.xl,
+                  fontSize: tokens.font.size.sm,
                   fontWeight: tokens.font.weight.bold,
                 ),
               ),
@@ -130,27 +128,6 @@ class _LoginPageState extends State<LoginPage> {
                   }).catchError((error) {
                     print(error);
                   });
-                },
-              ),
-              SizedBox(height: tokens.spacing.stack.xs),
-              OwnButton(
-                label: 'Logar',
-                type: OwnButtonType.primary,
-                size: OwnButtonSize.sm,
-                onPressed: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  final token = prefs.getString('xDebuggingNetwork');
-                  log(token ?? 'Nada', name: 'xDebuggingNetwork');
-                },
-              ),
-              SizedBox(height: tokens.spacing.stack.xs),
-              OwnButton(
-                label: 'Salvar',
-                type: OwnButtonType.primary,
-                size: OwnButtonSize.sm,
-                onPressed: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.setString('xDebuggingNetwork', 'Teste');
                 },
               ),
             ],
